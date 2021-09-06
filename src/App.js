@@ -1,25 +1,51 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css'
+import ActiveLiveness from './Components/ActiveLiveness'
+import AgeDetector from './Components/AgeDetector'
+import Home from './Components/Home';
+import Message from './Components/Message';
+import APIKeyManager from './Components/APIKeyManager';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <Router>
+
+            <header>
+                <h1>Active liveliness detector</h1>
+            </header>
+
+            <APIKeyManager/>
+
+            <Switch>
+
+                <Route exact path='/'>
+                    <Home/>
+                </Route>
+
+                <Route path='/active-liveliness'>
+                    <ActiveLiveness/>
+                </Route>
+
+                <Route path='/age-detector'>
+                    <AgeDetector/>
+                </Route>
+
+                <Route path='*'>
+
+                    <center>
+                        <h3>Sorry...no page found</h3>
+                    </center>
+
+                </Route>
+
+            </Switch>
+
+            <Message/>
+
+        </Router>
+    )
 }
 
-export default App;
+export default App

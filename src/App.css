@@ -1,38 +1,217 @@
-.App {
-  text-align: center;
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body{
+    background-color: rgb(3, 3, 3);
+    color: white;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+}
+header{
+    padding: 20px;
+    margin: 20px;
+    border-bottom: 5px solid chartreuse;
+    text-transform: capitalize;
+}
+header > h1{
+    text-shadow: 2px 2px 0.8px grey;
+    animation: sideAnimation 0.5s ease-in-out;
+}
+.page-link{
+    background-color: black;
+    border: none;
+    width: fit-content;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+.page-link:hover{
+    background-color: black;
+    border: none;
+}
+.page-link > button{
+    margin: 170px auto;
+    padding: 30px 100px;
+    font-size: 2vw;
+}
+@keyframes sideAnimation {
+    from{transform: translate(-100%)}to{transform: translate(0)}
+}
+.active-liveness-page{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    margin: 30px;
+}
+.video-container{
+    background-color: rgb(48, 46, 46);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+.switch-container{
+    display: grid;
+    place-items: center;
+}
+.video-container, .video-result{
+    animation: startComponent 0.5s ease-in-out;
+}
+@keyframes startComponent {
+    from{transform: translate(0,-100%)}to{transform: translate(0)}
+}
+.video-text{
+    color: red;
+    margin: 10px;
+    font-weight: bolder;
+    font-size: larger;
+}
+.video-text.started{
+    animation: videoStarted 1.3s ease infinite;
+    background-color: white;
+    padding: 5px 20px;
+    border-radius: 20px;
+}
+@keyframes videoStarted {
+    from{opacity: 0} to{opacity: 1;}
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.video-result{
+    margin-left: 30px;
+    list-style-type: none;
+    background-color: rgb(236, 230, 230);
+    display: grid;
+    justify-content: center;
+    align-items:center;
+    align-content: center;
+}
+.list{
+    transition: 0.5s ease;
+    background-color: red;
+    color: white;
+    padding: 20px 20px 0 20px;
+    border-radius: 20px;
+    margin: 20px;
+    width: 180px;
+    text-align: center;
+}
+.list p{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+}
+.list p span{
+    transform:scale(1.6);
+}
+.list.done{
+    background-color: green;
+    font-weight: bold;
+    font-size: large;
+}
+.list-enter{
+    transform: translate(100%);
+    opacity: 0;
+}
+.list.done-active{
+    transform: translate(0);
+    opacity: 1;
+}
+.list-exit{
+    opacity: 1;
+    transform: translate(0);
+}
+.list-exit-active{
+    transition: 0.5s ease;
+    opacity: 0;
+    transform: translate(-100%);
+}
+.webCamWidth{
+    width: 100%;
+    height: 500px;
+}
+.message{
+    background-color:coral;
+    color:white;
+    text-align: center;
+    padding: 13px;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    font-weight: bolder;
+    font-size: 1.3rem;
+    transform: translate(0,100%);
+    transition: 0.5s ease;
+    z-index: 1140;
+}
+.message.open{
+    transform: translate(0, 0);
+}
+.no-video-access, .no-video-access>div{
+    display: grid;
+    place-items: center;
+}
+.api-key-form-container{
+    position: fixed;
+    color: black;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    display: grid;
+    place-items: center;
+}
+.api-key-form{
+    background-color: white;
+    position: relative;
+    width: fit-content;
+    padding: 8%;
+}
+.api-key-form h3{
+    margin-bottom: 50px;
+}
+.api-key-form > div{
+    display: flex;
+    justify-content: space-between;
+}
+.api-key-form > input{
+    width: 1000px;
+}
+.form-container-enter{
+    opacity: 0;
+}
+.form-container-enter-active{
+    opacity: 1;
+    transition: 0.5s ease;
+}
+.form-container-exit-active{
+    opacity: 0;
+    transition: 0.5s ease;
+}
+.no-api{
+    position: absolute;
+    bottom: 0;
+    right: 20px;
+    color: cornflowerblue;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+@media only screen and (max-width: 700px) {
+    .api-key-form{
+        padding: 15%;
+    }
+    .page-link > button{
+        font-size: 3vw;
+    }
+    .active-liveness-page{
+        grid-template-columns: auto;
+        margin: 5px;
+    }
+    .video-result{
+    margin-left: 0;
+    margin-top: 20px;
 }
-
-.App-link {
-  color: #61dafb;
+.webCamWidth{
+    height: 70vw;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
